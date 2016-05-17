@@ -24,19 +24,42 @@
                 templateUrl: 'login/login.view.html',
                 controllerAs: 'vm'
             })
-
             .when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'register/register.view.html',
                 controllerAs: 'vm'
             })
             
+		  .when('/store', {
+			templateUrl: 'partials/store.htm',
+			controller: storeController 
+		  }).
+		  when('/products/:productSku', {
+			templateUrl: 'partials/product.htm',
+			controller: storeController
+		  }).
+		  when('/cart', {
+			templateUrl: 'partials/shoppingCart.htm',
+			controller: storeController
+		  })
 
+			
             .otherwise({ redirectTo: '/' });
     }
 
-    run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
-    function run($rootScope, $location, $cookieStore, $http) {
+    run.$inject = ['$rootScope', '$location', '$cookieStore', '$http','$window'];
+    function run($rootScope, $location, $cookieStore, $http, $window) {
+		
+		$window.fbAsyncInit = function() {
+			FB.init({ 
+			  appId: '1564484997178485',
+			  status: true, 
+			  cookie: true, 
+			  xfbml: true,
+			  version: 'v2.4'
+			});
+		};
+		
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
