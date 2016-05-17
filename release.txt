@@ -1,0 +1,1 @@
+17/05/2016 - Current code is stable for form based basic authentication. Next target is to integrate the facebook login.
