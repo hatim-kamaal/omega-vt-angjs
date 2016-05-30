@@ -1,3 +1,6 @@
+https://github.com/Ciul/angular-facebook
+
+
 https://www.toptal.com/angular-js/facebook-login-angularjs-app-satellizer
 
 //AngularJS Shopping Cart modified to support Stripe.js (includes Google Wallet and Paypal already) support
@@ -5,3 +8,9 @@ https://github.com/kenyee/angularjs-cart ()
 
 Tomcat 7 
 /var/lib/tomcat7
+
+
+ANGJS + Facebook
+		https://github.com/GoDisco/ngFacebook
+		http://plnkr.co/edit/HcYBFKbqFcgQGhyCGQMw?p=preview
+		
