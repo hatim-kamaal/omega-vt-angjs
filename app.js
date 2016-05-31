@@ -2,12 +2,15 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies'])
+        .module('app', ['ngRoute', 'ngCookies', 'ngFacebook'])
         .config(config)
         .run(run);
 
-    config.$inject = ['$routeProvider', '$locationProvider'];
-    function config($routeProvider, $locationProvider) {
+    config.$inject = ['$routeProvider', '$locationProvider', '$facebookProvider'];
+    function config($routeProvider, $locationProvider, $facebookProvider) {
+    	
+    	$facebookProvider.setAppId('1564484997178485');
+    	
         $routeProvider
             .when('/', {
                 controller: 'LandingController',
@@ -50,15 +53,23 @@
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http','$window'];
     function run($rootScope, $location, $cookieStore, $http, $window) {
 		
-		$window.fbAsyncInit = function() {
-			FB.init({ 
-			  appId: '1564484997178485',
-			  status: true, 
-			  cookie: true, 
-			  xfbml: true,
-			  version: 'v2.4'
-			});
-		};
+    	(function(){
+    	     // If we've already installed the SDK, we're done
+    	     if (document.getElementById('facebook-jssdk')) {return;}
+
+    	     // Get the first script element, which we'll use to find the parent node
+    	     var firstScriptElement = document.getElementsByTagName('script')[0];
+
+    	     // Create a new script element and set its id
+    	     var facebookJS = document.createElement('script'); 
+    	     facebookJS.id = 'facebook-jssdk';
+
+    	     // Set the new script's source to the source of the Facebook JS SDK
+    	     facebookJS.src = '//connect.facebook.net/en_US/all.js';
+
+    	     // Insert the Facebook JS SDK into the DOM
+    	     firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+    	   }());
 		
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
